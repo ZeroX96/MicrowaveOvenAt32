@@ -5,21 +5,41 @@
  * Author : ZeroX
  */ 
 #include "MicroWave.h"
+#include "SysMain.h"
+
+
+//system task handlers
+TaskHandle_t SysInHandler;
+TaskHandle_t SysOutHandler;
+TaskHandle_t SysMainHandler;
+void SystemInputUpdate(void* VoidPtr);
+void SystemOutputUpdate(void* VoidPtr);
+void SystemMain(void* VoidPtr);
 
 int main(void){
+
     //initialization
     systemInit();
 	//create tasks
-	xTaskCreate
+	//System Input Update Task functions >> 5 = max priority in sys
+	xTaskCreate(SystemInputUpdate, "SysInUpdate", configMINIMAL_STACK_SIZE, NULL, 5, &SysInHandler);
+	//System Output Update Task Functions >> 4 
+	xTaskCreate(SystemOutputUpdate, "SysOutUpdate", configMINIMAL_STACK_SIZE, NULL, 4, &SysOutHandler);
 	//task send data and current state to the phone
+	xTaskCreate(SystemMain, "SysMain", configMINIMAL_STACK_SIZE, NULL, 3, &SysMainHandler);
     //task cock
     while (1){
       //update
         //input 
-        
+        // time from the user
+        // button start - pause - stop
         //process
-        
+        //show the result
+        //turn on - of devices
+        //calculate the remaining time
         //output
+        //turn on - off devices
+        //turn on - off the heater - the lamp - the motor
         vTaskStartScheduler();
     }
     return 0;
@@ -40,18 +60,37 @@ void systemInit(){
 	BtnInit(BTN_CANCEL, BTN_RELEASED);
 	
 }
-void vATaskFunction( void *pvParameters );
-void vATaskFunction( void *pvParameters ){
-	        for( ;; )
-        {
-            //-- Task application code here. --
-        }
 
-        /* Tasks must not attempt to return from their implementing
-        function or otherwise exit.  In newer FreeRTOS port
-        attempting to do so will result in an configASSERT() being
-        called if it is defined.  If it is necessary for a task to
-        exit then have the task call vTaskDelete( NULL ) to ensure
-        its exit is clean. */
-        vTaskDelete( NULL );
+void SystemInputUpdate(void* VoidPtr){
+	for( ;; ){
+		//-- Task application code here. --
+		BtnUpdate();
+		DoorSensUpdate();
+		WeightSensUpdate();
+		KeypadUpdate();
+		PhoneUpdateRx();
+		PhoneUpdateTx();
+	}
+	/* Tasks must not attempt to return else, delete */
+	vTaskDelete( NULL );
+}
+
+void SystemOutputUpdate(void* VoidPtr){
+	for( ;; ){
+		DisplayUpdate();
+		HeaterUpdate();
+		LampUpdate();
+		MotorUpdate();
+	}
+	/* Tasks must not attempt to return else, Delete */
+	vTaskDelete( NULL );
+}
+
+
+void SystemMain(void* VoidPtr){
+    for( ;; ){
+        SysMainApp();
+    }
+    /* Tasks must not attempt to return else, Delete */
+    vTaskDelete( NULL );
 }

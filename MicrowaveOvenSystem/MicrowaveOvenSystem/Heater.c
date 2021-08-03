@@ -2,7 +2,7 @@
  * Heater.c
  *
  * Created: 7/23/2021 3:04:17 PM
- *  Author: Mosta
+ *  Author: ZeroX96
  */ 
 #include "Heater.h"
 

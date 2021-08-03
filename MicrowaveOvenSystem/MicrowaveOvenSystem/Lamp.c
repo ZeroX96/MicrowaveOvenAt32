@@ -2,7 +2,7 @@
  * Lamp.c
  *
  * Created: 7/23/2021 3:04:40 PM
- *  Author: Mosta
+ *  Author: ZeroX96
  */ 
 #include "Lamp.h"
 

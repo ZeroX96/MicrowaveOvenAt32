@@ -16,7 +16,7 @@ static uint8_t InternalMatrixCodes[KEYPAD_NUMB_ROWS][KEYPAD_NUMB_COLS] = {'1','2
 	                                                                      '4','5','6','/',
 																          '7','8','9','-',
 																          '=','0','%','+'};
-																		
+ 																		
 static KeypadStateT InternalMatrixStates[KEYPAD_NUMB_ROWS][KEYPAD_NUMB_COLS] = {KEY_RELEASED};
 static TimerT SysTimer;
 static KeypadT SysKeypad;

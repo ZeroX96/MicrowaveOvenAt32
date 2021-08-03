@@ -309,6 +309,12 @@
     <Compile Include="Phone.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="SysMain.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="SysMain.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="WeightSensor.c">
       <SubType>compile</SubType>
     </Compile>

@@ -2,7 +2,7 @@
  * Display.h
  *
  * Created: 7/22/2021 9:02:50 AM
- *  Author: Mosta
+ *  Author: ZeroX96
  */ 
 
 
@@ -16,12 +16,17 @@
 typedef enum{
 	DISPLAY_SETTING_TIME,
 	DISPLAY_RUNING,
+	DISPLAY_PAUSED,
 }DisplayStateT;
 
 //called in the init
 void DisplayInit(void );
 //called in the loop
 void DisplaySetTime(uint8_t Minutes, uint8_t Seconds);
+//called in the task
+void DisplayGetState(void);
+//called in the task
+void DisplaySetState(DisplayStateT NewState);
 //called in the isr
 void DisplayUpdate(void );
 

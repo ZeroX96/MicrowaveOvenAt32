@@ -2,7 +2,7 @@
  * DoorSensor.c
  *
  * Created: 7/23/2021 6:35:06 AM
- *  Author: Mosta
+ *  Author: ZeroX96
  */ 
 #include "DoorSensor.h"
 

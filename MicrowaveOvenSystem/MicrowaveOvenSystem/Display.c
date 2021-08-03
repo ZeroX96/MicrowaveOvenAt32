@@ -2,7 +2,7 @@
  * Display.c
  *
  * Created: 7/22/2021 9:08:59 AM
- *  Author: Mosta
+ *  Author: ZeroX96
  * -2.2.0.295
  */ 
 
@@ -13,7 +13,9 @@ static LcdT	   Display;
 static uint8_t DisplayTimeMinutes = 0;
 static uint8_t DisplayTimeSeconds = 0;
 //arrays to present on the screen
-static uint8_t* SettingsFLine  = " Time Settings ";
+static uint8_t* SettingsFLine   = " Time Settings ";
+static uint8_t* PausedFLine     = " System Paused ";
+static uint8_t* PausedScndLine  = "Waiting  Command";
 static uint8_t* RemainingFLine  = " Remaining Time ";
 static uint8_t* DispSecondLine  = " Time = ";
 //to buffer the time value to present on the display
@@ -28,9 +30,19 @@ void DisplayInit(void ){
 }
 
 void DisplaySetTime(uint8_t Minutes, uint8_t Seconds){
+    //mutual exclusion here
+    DisplayTimeMinutes = Minutes;
+    DisplayTimeSeconds = Seconds;
+}
+
+void DisplaySetState(DisplayStateT NewState){
+    //mutual exclusion here
+    DisplaySt = NewState;
+}
+
+void DisplayGetState(void){
 	//mutual exclusion here
-	DisplayTimeMinutes = Minutes;
-	DisplayTimeSeconds = Seconds;
+	return DisplaySt;
 }
 void DisplayUpdate(void ){
 	
@@ -40,17 +52,26 @@ void DisplayUpdate(void ){
 		LcdCommOut(&Display,BEGIN_FROM_2ND_LINE);
 		LcdArrDataOut(&Display,DispSecondLine);
 	}
-	else{ //DISPLAY_RUNING
+	else if (DisplaySt == DISPLAY_RUNING){
 		LcdCommOut(&Display,BEGIN_FROM_1ST_LINE);
 		LcdArrDataOut(&Display,RemainingFLine);
 		LcdCommOut(&Display,BEGIN_FROM_2ND_LINE);
 		LcdArrDataOut(&Display,DispSecondLine);
+	    //mutual exclusion here
+	    itoa(DisplayTimeMinutes, TimeMinBuffer, 10);
+	    LcdArrDataOut(&Display, TimeMinBuffer);
+	    LcdCharDataOut(&Display,':');
+	    itoa(DisplayTimeSeconds, TimeSecBuffer, 10);
+	    LcdArrDataOut(&Display, TimeSecBuffer);
 	}
-	//mutual exclusion here
-	itoa(DisplayTimeMinutes, TimeMinBuffer, 10);
-	LcdArrDataOut(&Display, TimeMinBuffer);
-	LcdCharDataOut(&Display,':');
-	itoa(DisplayTimeSeconds, TimeSecBuffer, 10);
-	LcdArrDataOut(&Display, TimeSecBuffer);
+    else if (DisplaySt == DISPLAY_PAUSED){
+        LcdCommOut(&Display,BEGIN_FROM_1ST_LINE);
+        LcdArrDataOut(&Display,PausedFLine);
+        LcdCommOut(&Display,BEGIN_FROM_2ND_LINE);
+        LcdArrDataOut(&Display,PausedScndLine);
+    }
+    else{
+        //do-nothing
+    }        
 	return LCD_ERR_NO;
 }

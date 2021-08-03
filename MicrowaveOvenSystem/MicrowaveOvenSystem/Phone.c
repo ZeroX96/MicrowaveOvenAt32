@@ -2,7 +2,7 @@
  * Phone.c
  *
  * Created: 7/23/2021 2:25:44 AM
- *  Author: Mosta
+ *  Author: ZeroX96
  */ 
 #include "Phone.h"
 static UsartT Phone;
