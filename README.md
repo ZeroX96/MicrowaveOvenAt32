@@ -1,7 +1,7 @@
 # MicrowaveOvenAt32
 An RTOS-based system implemented using the FreeRTOS Kernel on the Atmega-32. The Kernel Monitor and control the system tasks. The user selects the cooking needed time using his smart phone or a keypad.
 
-![](D:\Work\Projects\AtmelStudioWS\MicrowaveOvenAt32\MicrowaveOvenSystemV2\MicroWaveSim.png)
+![](https://github.com/ZeroX96/MicrowaveOvenAt32/blob/main/MicrowaveOvenSystemV2/MicroWave%20-%201.png)
 
 ```c
 /*
