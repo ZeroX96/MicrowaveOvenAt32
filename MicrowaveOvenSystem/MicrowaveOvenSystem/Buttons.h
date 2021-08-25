@@ -8,6 +8,8 @@
 
 #ifndef BUTTONS_H_
 #define BUTTONS_H_
+#include <stdint.h>
+#include "Gpio.h"
 //this is defined in the sys-timer 
 #define SYS_TICK_PERIOD 1
 //the period per which the 

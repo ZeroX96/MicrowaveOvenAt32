@@ -8,7 +8,7 @@
 // /* SW voltage level */
 // #define BTN_PRESSED_LEVEL        (0)
 // #define BTN_RELEASED_LEVEL       (1)
-
+#include "Buttons.h"
 typedef struct{
 	uint8_t	  BtnSamples[SAMPLES_NUM];
 	BtnStateT BtnState;

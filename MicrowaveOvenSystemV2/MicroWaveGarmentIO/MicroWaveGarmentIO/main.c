@@ -1,9 +1,3 @@
-# MicrowaveOvenAt32
-An RTOS-based system implemented using the FreeRTOS Kernel on the Atmega-32. The Kernel Monitor and control the system tasks. The user selects the cooking needed time using his smart phone or a keypad.
-
-![](D:\Work\Projects\AtmelStudioWS\MicrowaveOvenAt32\MicrowaveOvenSystemV2\MicroWaveSim.png)
-
-```c
 /*
  * main.c
  *
@@ -44,15 +38,33 @@ int main(void)
         /*System Is Never Supposed To Come Here!!!!!*/
     }
 }
-```
 
-![](D:\Work\Projects\AtmelStudioWS\MicrowaveOvenAt32\MicrowaveOvenSystemV2\MicroWave - 1.png)
 
-![](D:\Work\Projects\AtmelStudioWS\MicrowaveOvenAt32\MicrowaveOvenSystemV2\MicroWave - 2.png)
-
-![](D:\Work\Projects\AtmelStudioWS\MicrowaveOvenAt32\MicrowaveOvenSystemV2\MicroWave - 3.png)
-
-![](D:\Work\Projects\AtmelStudioWS\MicrowaveOvenAt32\MicrowaveOvenSystemV2\MicroWave - 4.png)
-
-![](D:\Work\Projects\AtmelStudioWS\MicrowaveOvenAt32\MicrowaveOvenSystemV2\MicroWave - 5.png)
-
+/*******************************************************************************/
+/* systemInit: Function initializes the hardware and software modules to be    */
+/*                ready for usage for the whole system.                        */
+/* initializes: Timer - Display - Buttons - Buzzer - Lamp - Heater - Door      */
+/* Params:                                                                     */
+/* Input = NON                                                                 */
+/* Output= NON                                                                 */
+/*******************************************************************************/
+void systemInit(void){
+    // initialize the timer module
+    TimeInit();
+    //initialize the display module
+    DispInit();
+    //initialize the Door sensor module
+    DoorSensInit();
+    //initialize the Lamp Module
+    LampInit(LAMP_ONE, LAMP_OFF);
+    //initialize the buzzer module
+    BuzzInit(BUZZ_ONE, BUZZ_OFF);
+    //initialize the heater module
+    HeaterInit(HEATER_ONE, HEATER_OFF);
+    //initialize the buttons
+    BtnInit(BTN_MINUS, BTN_RELEASED);
+    BtnInit(BTN_PLUS, BTN_RELEASED);
+    BtnInit(BTN_START, BTN_RELEASED);
+    //initialize the system
+    MicroWaveInitState(MICROWAVE_COCKING_STARTUP);
+}

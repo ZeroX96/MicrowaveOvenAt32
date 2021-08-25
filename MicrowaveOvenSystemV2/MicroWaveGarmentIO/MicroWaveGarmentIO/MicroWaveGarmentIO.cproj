@@ -12,9 +12,9 @@
     <OutputFileName>$(MSBuildProjectName)</OutputFileName>
     <OutputFileExtension>.elf</OutputFileExtension>
     <OutputDirectory>$(MSBuildProjectDirectory)\$(Configuration)</OutputDirectory>
-    <AssemblyName>MicrowaveOvenSystem</AssemblyName>
-    <Name>MicrowaveOvenSystem</Name>
-    <RootNamespace>MicrowaveOvenSystem</RootNamespace>
+    <AssemblyName>MicroWaveGarmentIO</AssemblyName>
+    <Name>MicroWaveGarmentIO</Name>
+    <RootNamespace>MicroWaveGarmentIO</RootNamespace>
     <ToolchainFlavour>Native</ToolchainFlavour>
     <KeepTimersRunning>true</KeepTimersRunning>
     <OverrideVtor>false</OverrideVtor>
@@ -30,29 +30,16 @@
     <EraseKey />
     <AsfFrameworkConfig>
       <framework-data xmlns="">
-        <options />
-        <configurations />
-        <files />
-        <documentation help="" />
-        <offline-documentation help="" />
-        <dependencies>
-          <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.47.0" />
-        </dependencies>
-      </framework-data>
+  <options />
+  <configurations />
+  <files />
+  <documentation help="" />
+  <offline-documentation help="" />
+  <dependencies>
+    <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.47.0" />
+  </dependencies>
+</framework-data>
     </AsfFrameworkConfig>
-    <avrtool>com.atmel.avrdbg.tool.simulator</avrtool>
-    <avrtoolserialnumber />
-    <avrdeviceexpectedsignature>0x1E9502</avrdeviceexpectedsignature>
-    <com_atmel_avrdbg_tool_simulator>
-      <ToolOptions xmlns="">
-        <InterfaceProperties>
-        </InterfaceProperties>
-      </ToolOptions>
-      <ToolType xmlns="">com.atmel.avrdbg.tool.simulator</ToolType>
-      <ToolNumber xmlns="">
-      </ToolNumber>
-      <ToolName xmlns="">Simulator</ToolName>
-    </com_atmel_avrdbg_tool_simulator>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <ToolchainSettings>
@@ -111,12 +98,14 @@
   <avrgcc.compiler.directories.IncludePaths>
     <ListValues>
       <Value>%24(PackRepoDir)\atmel\ATmega_DFP\1.3.300\include</Value>
+      <Value>..</Value>
+      <Value>../HwDeviceDrivers</Value>
       <Value>../FreeRTOS</Value>
       <Value>../FreeRTOS/include</Value>
       <Value>../FreeRTOS/portable</Value>
+      <Value>../FreeRTOS/portable/GCC</Value>
       <Value>../FreeRTOS/portable/GCC/ATMega323</Value>
       <Value>../FreeRTOS/portable/MemMang</Value>
-      <Value>../HwDeviceDrivers</Value>
     </ListValues>
   </avrgcc.compiler.directories.IncludePaths>
   <avrgcc.compiler.optimization.level>Optimize (-O1)</avrgcc.compiler.optimization.level>
@@ -145,10 +134,16 @@
     <Compile Include="Buttons.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Display.c">
+    <Compile Include="Buzzer.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Display.h">
+    <Compile Include="Buzzer.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Disp.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Disp.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="DoorSensor.c">
@@ -217,19 +212,7 @@
     <Compile Include="FreeRTOS\portable\GCC\ATMega323\portmacro.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="FreeRTOS\portable\MemMang\heap_1.c">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="FreeRTOS\portable\MemMang\heap_2.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="FreeRTOS\portable\MemMang\heap_3.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="FreeRTOS\portable\MemMang\heap_4.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="FreeRTOS\portable\MemMang\heap_5.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="FreeRTOS\queue.c">
@@ -256,34 +239,16 @@
     <Compile Include="HwDeviceDrivers\HwAccess.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="HwDeviceDrivers\KeyPad.c">
+    <Compile Include="HwDeviceDrivers\Pwm.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="HwDeviceDrivers\KeyPad.h">
+    <Compile Include="HwDeviceDrivers\Pwm.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="HwDeviceDrivers\Lcd.c">
+    <Compile Include="HwDeviceDrivers\SevenSeg.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="HwDeviceDrivers\Lcd.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="HwDeviceDrivers\Timer.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="HwDeviceDrivers\Timer.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="HwDeviceDrivers\Usart.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="HwDeviceDrivers\Usart.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="KeyPadApp.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="KeyPadApp.h">
+    <Compile Include="HwDeviceDrivers\SevenSeg.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Lamp.c">
@@ -292,34 +257,22 @@
     <Compile Include="Lamp.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="MicroWave.h">
+    <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="MicroWave.c">
+    <Compile Include="main.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Motor.c">
+    <Compile Include="Microwave.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Motor.h">
+    <Compile Include="Microwave.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Phone.c">
+    <Compile Include="Time.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Phone.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="SysMain.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="SysMain.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="WeightSensor.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="WeightSensor.h">
+    <Compile Include="Time.h">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>
@@ -330,7 +283,7 @@
     <Folder Include="FreeRTOS\portable\GCC\" />
     <Folder Include="FreeRTOS\portable\GCC\ATMega323\" />
     <Folder Include="FreeRTOS\portable\MemMang\" />
-    <Folder Include="HwDeviceDrivers" />
+    <Folder Include="HwDeviceDrivers\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="FreeRTOS\include\stdint.readme">

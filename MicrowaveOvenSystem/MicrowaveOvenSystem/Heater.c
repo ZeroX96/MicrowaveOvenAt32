@@ -10,7 +10,7 @@ static HeaterStateT InternalHeaterStates[HEATERS_NUM];
 
 
 void HeaterInit(HeaterSelectT HeaterSelect, HeaterStateT HeaterInitState){
-	if (HeaterSelect == LAMP_ONE){
+	if (HeaterSelect == HEATER_ONE){
 		GpioInitPin(HEATER_ONE_BASE, HEATER_ONE_PIN, PIN_OUT);
 	}
 	else{

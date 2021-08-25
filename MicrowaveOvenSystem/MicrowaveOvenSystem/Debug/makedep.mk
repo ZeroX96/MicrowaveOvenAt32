@@ -2,6 +2,12 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
+Buttons.c
+
+Display.c
+
+DoorSensor.c
+
 FreeRTOS\croutine.c
 
 FreeRTOS\event_groups.c
@@ -26,9 +32,7 @@ FreeRTOS\tasks.c
 
 FreeRTOS\timers.c
 
-HwDeviceDrivers\Adc.c
-
-HwDeviceDrivers\ExternalEeprom.c
+Heater.c
 
 HwDeviceDrivers\Gpio.c
 
@@ -36,13 +40,21 @@ HwDeviceDrivers\KeyPad.c
 
 HwDeviceDrivers\Lcd.c
 
-HwDeviceDrivers\SevenSeg.c
-
 HwDeviceDrivers\Timer.c
-
-HwDeviceDrivers\Twi.c
 
 HwDeviceDrivers\Usart.c
 
+KeyPadApp.c
+
+Lamp.c
+
 MicroWave.c
+
+Motor.c
+
+Phone.c
+
+SysMain.c
+
+WeightSensor.c
 
